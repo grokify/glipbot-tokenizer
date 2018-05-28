@@ -154,6 +154,10 @@ func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationC
 }
 
 func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq anyhttp.Request) {
+	err := aReq.ParseForm()
+	if err != nil {
+		log.WithFields(log.Fields{"Error:": err.Error()}).Info("ERR_PARSE_FORM")
+	}
 	cacheKey := buildCacheKey(aReq)
 	userData, err := h.getUserData(cacheKey)
 	if err != nil {
@@ -170,6 +174,10 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 
 	// Exchange auth code for token
 	userData.AppCredentials = getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
+
+	log.WithFields(log.Fields{"clientId": userData.AppCredentials.ClientID}).Info("clientId")
+	log.WithFields(log.Fields{"clientSecret": userData.AppCredentials.ClientSecret}).Info("clientSecret")
+	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
 
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
