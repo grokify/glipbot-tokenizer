@@ -25,6 +25,7 @@ import (
 const (
 	CookieNameSession = "gbtsession"
 	CookieSalt        = "Trying to get my Glip bot token the easy way!"
+	HeaderXServerURL  = "X-Server-URL"
 )
 
 type Handler struct {
@@ -120,6 +121,16 @@ func (h *Handler) setUserData(cacheKey string, userData UserData) error {
 	}
 }
 
+func (h *Handler) handleAnyRequestOAuth2CallbackProd(aRes anyhttp.Response, aReq anyhttp.Request) {
+	aRes.SetHeader(HeaderXServerURL, ro.ServerURLProduction)
+	h.handleAnyRequestOAuth2Callback(aRes, aReq)
+}
+
+func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq anyhttp.Request) {
+	aRes.SetHeader(HeaderXServerURL, ro.ServerURLSandbox)
+	h.handleAnyRequestOAuth2Callback(aRes, aReq)
+}
+
 func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq anyhttp.Request) {
 	cacheKey := buildCacheKey(aReq)
 	userData, err := h.getUserData(cacheKey)
@@ -137,6 +148,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	}).Info(authCode)
 
 	// Exchange auth code for token
+	userData.AppCredentials.ServerURL = string(aRes.GetHeader(HeaderXServerURL))
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
@@ -191,11 +203,17 @@ func serveNetHttp(h Handler) {
 	mux.HandleFunc("/button/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestButton(anyhttp.NewResReqNetHttp(w, r))
 	}))
-	mux.HandleFunc("/oauth2callback", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2Callback(anyhttp.NewResReqNetHttp(w, r))
+	mux.HandleFunc("/oauth2callback/production", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHttp(w, r))
 	}))
-	mux.HandleFunc("/oauth2callback/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2Callback(anyhttp.NewResReqNetHttp(w, r))
+	mux.HandleFunc("/oauth2callback/production/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHttp(w, r))
+	}))
+	mux.HandleFunc("/oauth2callback/sandbox", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
+	}))
+	mux.HandleFunc("/oauth2callback/sandbox/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
 	}))
 	mux.HandleFunc("/installed", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestInstalled(anyhttp.NewResReqNetHttp(w, r))

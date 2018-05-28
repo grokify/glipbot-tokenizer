@@ -26,6 +26,22 @@ or
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+## Notes
+
+### Maintenance
+
+Heroku requires `godep`.
+
+Rebuild `vendor` directory with:
+
+```
+$ godep save ./...
+```
+
+More information on deploying Go on Heroku here:
+
+* https://devcenter.heroku.com/articles/go-support
+
  [build-status-svg]: https://api.travis-ci.org/grokify/glipbot-tokenizer.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/glipbot-tokenizer
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/glipbot-tokenizer
