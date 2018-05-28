@@ -7,7 +7,7 @@
   </head>
   <style>
     h1, h2, p, select {font-family: Arial, Helvetica, sans-serif;}
-    .code {font-family: monospace;background-color:#efefef;border:1px solid #aaa;width:90%;height:1em;padding:0.3em;}
+    .code {font-family: monospace;background-color:#efefef;border:1px solid #aaa;width:90%;height:5em;padding:0.3em;}
     .fixed {font-family: monospace;background-color:#efefef;border:1px solid #aaa;width:90%;height:1em;padding:0.3em;color:#800000;border-radius:3px;}
   </style>
   <script type="text/javascript">
@@ -68,7 +68,7 @@ function buildAndShowRedirectUrl() {
       <p><input type="text" id="email" name="email" value="" placeholder="Email address to deliver your token" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
 
       <p>Your Redirect URL:</p>
-      <p id="redirectUrl" class="code"></p>
+      <textarea id="redirectUrl" class="code"></textarea>
 
     </form>
 
