@@ -5,14 +5,27 @@
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 
+Helper app to retrieve Glip bot access token.
 
+## Installation
 
+### Deploying to Heroku
 
- [build-status-svg]: https://api.travis-ci.org/grokify/ringcentral-permahooks.svg?branch=master
- [build-status-link]: https://travis-ci.org/grokify/ringcentral-permahooks
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/ringcentral-permahooks
- [goreport-link]: https://goreportcard.com/report/github.com/grokify/ringcentral-permahooks
+```sh
+$ heroku create
+$ git push heroku master
+$ heroku open
+```
+
+or
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+ [build-status-svg]: https://api.travis-ci.org/grokify/glipbot-tokenizer.svg?branch=master
+ [build-status-link]: https://travis-ci.org/grokify/glipbot-tokenizer
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/glipbot-tokenizer
+ [goreport-link]: https://goreportcard.com/report/github.com/grokify/glipbot-tokenizer
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/ringcentral-permahooks
+ [docs-godoc-link]: https://godoc.org/github.com/grokify/glipbot-tokenizer
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-link]: https://github.com/grokify/ringcentral-permahooks/blob/master/LICENSE.md
+ [license-link]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
