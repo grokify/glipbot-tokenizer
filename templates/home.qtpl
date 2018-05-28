@@ -44,6 +44,8 @@ function buildAndShowRedirectUrl() {
 
     <p>Easily get your permanet Glip bot access token.</p>
 
+    <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
+
     <h2>Step 0) Prerequisites</h2>
 
     <p>Create an app in the RingCentral Developer Portal (<a href="https://developer.ringcentral.com">https://developer.ringcentral.com</a>)</p>
@@ -85,7 +87,7 @@ function buildAndShowRedirectUrl() {
     <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks.</p>
 
     <hr/>
-    <a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a>
+    <p><a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a></p>
   <script>
     buildAndShowRedirectUrl();
   </script>

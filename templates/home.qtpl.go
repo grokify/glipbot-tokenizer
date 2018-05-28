@@ -70,6 +70,8 @@ function buildAndShowRedirectUrl() {
 
     <p>Easily get your permanet Glip bot access token.</p>
 
+    <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
+
     <h2>Step 0) Prerequisites</h2>
 
     <p>Create an app in the RingCentral Developer Portal (<a href="https://developer.ringcentral.com">https://developer.ringcentral.com</a>)</p>
@@ -111,38 +113,38 @@ function buildAndShowRedirectUrl() {
     <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks.</p>
 
     <hr/>
-    <a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a>
+    <p><a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a></p>
   <script>
     buildAndShowRedirectUrl();
   </script>
   </body>
 </html>
 `)
-//line home.qtpl:94
+//line home.qtpl:96
 }
 
-//line home.qtpl:94
+//line home.qtpl:96
 func WriteHomePage(qq422016 qtio422016.Writer, data HomeData) {
-	//line home.qtpl:94
+	//line home.qtpl:96
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line home.qtpl:94
+	//line home.qtpl:96
 	StreamHomePage(qw422016, data)
-	//line home.qtpl:94
+	//line home.qtpl:96
 	qt422016.ReleaseWriter(qw422016)
-//line home.qtpl:94
+//line home.qtpl:96
 }
 
-//line home.qtpl:94
+//line home.qtpl:96
 func HomePage(data HomeData) string {
-	//line home.qtpl:94
+	//line home.qtpl:96
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line home.qtpl:94
+	//line home.qtpl:96
 	WriteHomePage(qb422016, data)
-	//line home.qtpl:94
+	//line home.qtpl:96
 	qs422016 := string(qb422016.B)
-	//line home.qtpl:94
+	//line home.qtpl:96
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line home.qtpl:94
+	//line home.qtpl:96
 	return qs422016
-//line home.qtpl:94
+//line home.qtpl:96
 }
