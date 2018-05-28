@@ -42,7 +42,7 @@ function buildAndShowRedirectUrl() {
     <h1>Glip Bot Tokenizer</h1>
     <p><a href="https://glipbot-tokenizer.herokuapp.com">https://glipbot-tokenizer.herokuapp.com</a></p>
 
-    <p>Easily get your permanet Glip bot access token.</p>
+    <p>Easily get your permanent Glip bot access token.</p>
 
     <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
 
