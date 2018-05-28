@@ -7,3 +7,7 @@ import (
 type EmailData struct {
 	Token *oauth2.Token
 }
+
+type HomeData struct {
+	AppServerUrl string
+}

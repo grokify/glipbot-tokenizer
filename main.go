@@ -6,7 +6,6 @@ import (
 	"net/url"
 	"os"
 	"strconv"
-	"strings"
 
 	sp "github.com/SparkPost/gosparkpost"
 	"github.com/grokify/gotilla/config"
@@ -28,14 +27,16 @@ const (
 )
 
 type Handler struct {
-	AppPort int
+	AppPort      int
+	AppServerUrl string
 }
 
 func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Request) {
 	log.WithFields(log.Fields{"handler": "handleAnyRequestHome"}).Info("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
-	aRes.SetBodyBytes([]byte(templates.HomePage()))
+	aRes.SetBodyBytes([]byte(templates.HomePage(
+		templates.HomeData{AppServerUrl: h.AppServerUrl})))
 }
 
 type UserData struct {
@@ -147,14 +148,9 @@ func serveNetHttp(h Handler) {
 	mux.HandleFunc("/oauth2callback/sandbox/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
 	}))
-
 	mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestHome(anyhttp.NewResReqNetHttp(w, r))
 	}))
-	/*
-		mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestHome(anyhttp.NewResReqNetHttp(w, r))
-	*/
 
 	done := make(chan bool)
 	go http.ListenAndServe(fmt.Sprintf(":%v", h.AppPort), mux)
@@ -175,17 +171,9 @@ func main() {
 		port = 3000
 	}
 
-	handler := Handler{AppPort: port}
+	handler := Handler{
+		AppPort:      port,
+		AppServerUrl: os.Getenv("APP_SERVER_URL")}
 
-	engine := strings.ToLower(strings.TrimSpace(os.Getenv("HTTP_ENGINE")))
-	if len(engine) == 0 {
-		engine = "nethttp"
-	}
-
-	switch engine {
-	case "fasthttp":
-		serveNetHttp(handler)
-	default:
-		serveNetHttp(handler)
-	}
+	serveNetHttp(handler)
 }

@@ -18,83 +18,131 @@ var (
 )
 
 //line home.qtpl:1
-func StreamHomePage(qw422016 *qt422016.Writer) {
+func StreamHomePage(qw422016 *qt422016.Writer, data HomeData) {
 	//line home.qtpl:1
 	qw422016.N().S(`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Glipbot Tokenizer</title>
   </head>
+  <style>
+    h1, h2, p, select {font-family: Arial, Helvetica, sans-serif;}
+    .code {font-family: monospace;background-color:#efefef;border:1px solid #aaa;width:90%;height:1em;padding:0.3em;}
+    .fixed {font-family: monospace;background-color:#efefef;border:1px solid #aaa;width:90%;height:1em;padding:0.3em;color:#800000;border-radius:3px;}
+  </style>
   <script type="text/javascript">
 
 // https://stackoverflow.com/questions/4907843/open-a-url-in-a-new-tab-and-not-a-new-window-using-javascript
-function openInNewTab(url) {
-  var win = window.open(url, '_blank');
-  win.focus();
+function buildRedirectUrl() {
+  var baseUrl = '`)
+	//line home.qtpl:17
+	qw422016.E().S(data.AppServerUrl)
+	//line home.qtpl:17
+	qw422016.N().S(`';
+
+  var url = baseUrl + '/oauth2callback/' + document.getElementById('environment').value;
+
+  var clientId = encodeURIComponent(document.getElementById("clientId").value);
+  var clientSecret = encodeURIComponent(document.getElementById("clientSecret").value);
+  var email = encodeURIComponent(document.getElementById("email").value);
+
+  var queryString = '&clientId=' + clientId + '&clientSecret=' + clientSecret + '&email=' + email;
+
+  return url + queryString
 }
 
-function openGlipBot(appId) {
-  if (appId.length == 0) {
-    alert("Please enter your Application Id");
-    return;
+function buildAndShowRedirectUrl() {
+  var redirectUrl = buildRedirectUrl();
+  var span = document.getElementById('redirectUrl');
+
+  while( span.firstChild ) {
+    span.removeChild( span.firstChild );
   }
-  var url = 'https://www.ringcentral.com/apps/' + appId + 
-    '/install?landing_url=https%3A%2F%2Fglipbot-tokenizer.herokuapp.com%2Faccess_token';
-  openInNewTab(url);
+  span.appendChild( document.createTextNode(redirectUrl) );
 }
 
   </script>
   <body>
-    <h1>Glip bot Tokenizer</h1>
+    <h1>Glip Bot Tokenizer</h1>
+    <p><a href="https://glipbot-tokenizer.herokuapp.com">https://glipbot-tokenizer.herokuapp.com</a></p>
 
-    <p>Get your private Glip bot token.</p>
+    <p>Easily get your permanet Glip bot access token.</p>
+
+    <h2>Step 0) Prerequisites</h2>
+
+    <p>Create an app in the RingCentral Developer Portal (<a href="https://developer.ringcentral.com">https://developer.ringcentral.com</a>)</p>
+    <p>Select Platform Type: <span class="fixed">Server/Bot</span></p>
+    <p>Select your desired permissions: <span class="fixed">Glip</span>, <span class="fixed">Webhook Subscriptions</span>, <span class="fixed">Edit Extensions</span></p>
+
+    <h2>Step 1) Add Redirect URL</h2>
+
+    <p>Use the following to create a redirect URL and add it to your app in the Developer Portal.</p>
 
     <form action="/button" method="post">
 
-      <p><input type="text" id="appId" name="appId" value="" placeholder="Your Bot App Id" style="width:400px" /></p>
-      <p><input type="text" id="clientId" name="clientId" value="" placeholder="Your Bot Client Id" style="width:400px" /></p>
-      <p><input type="text" id="clientSecret" name="clientSecret" value="" placeholder="Your Bot Client Secret" style="width:400px" /></p>
-      <p><select name="serverUrl">
-      <option value="https://platform.ringcentral.com">https://platform.ringcentral.com</option>
-      <option value="https://platform.devtest.ringcentral.com">https://platform.devtest.ringcentral.com</option>
+      <p><select id="environment" onchange="buildAndShowRedirectUrl()">
+        <option value="sandbox">Sandbox</option>
+        <option value="production">Production</option>
       </select></p>
 
-      <input type="submit" value="Next" />
+      <p><input type="text" id="clientId" name="clientId" value="" placeholder="Your Bot Client Id" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
+      <p><input type="text" id="clientSecret" name="clientSecret" value="" placeholder="Your Bot Client Secret" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
+      <p><input type="text" id="email" name="email" value="" placeholder="Email address to deliver your token" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
+
+      <p>Your Redirect URL:</p>
+      <p id="redirectUrl" class="code"></p>
 
     </form>
 
+    <h2>Step 2) Add Redirect URL</h2>
+
+    <p>Go to your Developer Portal and click the "Add to Glip" button under:</p>
+
+    <p><span class="fixed">Apps</span> > <span class="fixed">$myBot</span> > <span class="fixed">Bot</span> > <span class="fixed">Sandbox / Production</span> > <span class="fixed">Add to Glip</span></p>
+
+    <h2>Step 3) Receive an email with your Access Token</h2>
+
+    <p>You will receive an email with an access token which you can add to your bot.</p>
+
+    <h2>Step 4) Next Steps</h2>
+
+    <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks.</p>
+
     <hr/>
     <a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a>
+  <script>
+    buildAndShowRedirectUrl();
+  </script>
   </body>
 </html>
 `)
-//line home.qtpl:50
+//line home.qtpl:94
 }
 
-//line home.qtpl:50
-func WriteHomePage(qq422016 qtio422016.Writer) {
-	//line home.qtpl:50
+//line home.qtpl:94
+func WriteHomePage(qq422016 qtio422016.Writer, data HomeData) {
+	//line home.qtpl:94
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line home.qtpl:50
-	StreamHomePage(qw422016)
-	//line home.qtpl:50
+	//line home.qtpl:94
+	StreamHomePage(qw422016, data)
+	//line home.qtpl:94
 	qt422016.ReleaseWriter(qw422016)
-//line home.qtpl:50
+//line home.qtpl:94
 }
 
-//line home.qtpl:50
-func HomePage() string {
-	//line home.qtpl:50
+//line home.qtpl:94
+func HomePage(data HomeData) string {
+	//line home.qtpl:94
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line home.qtpl:50
-	WriteHomePage(qb422016)
-	//line home.qtpl:50
+	//line home.qtpl:94
+	WriteHomePage(qb422016, data)
+	//line home.qtpl:94
 	qs422016 := string(qb422016.B)
-	//line home.qtpl:50
+	//line home.qtpl:94
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line home.qtpl:50
+	//line home.qtpl:94
 	return qs422016
-//line home.qtpl:50
+//line home.qtpl:94
 }

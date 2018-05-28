@@ -33,7 +33,7 @@ func StreamTokenEmail(qw422016 *qt422016.Writer, data EmailData) {
 
 <p>Continue your development with the resources at the <a href="https://developer.ringcentral.com">RingCentral and Glip Developer Portal</a>.</p>
 
-<p><a href="https://glip.com">Glipbot</a> Tokenizer by <a href="https://github.com/grokify">grokify</a></p>
+<p><a href="https://glip.com">Glipbot</a> <a href="https://glipbot-tokenizer.herokuapp.com">Tokenizer</a> by <a href="https://github.com/grokify">grokify</a></p>
 `)
 //line email_token.qtpl:11
 }

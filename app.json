@@ -29,11 +29,6 @@
             "description": "Your sender email",
             "value": "",
             "required": true
-        },       
-        "HTTP_ENGINE": {
-            "description": "HTTP Engine",
-            "value": "nethttp",
-            "required": true
         }
     }
 }
