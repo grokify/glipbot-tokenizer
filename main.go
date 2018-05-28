@@ -180,6 +180,8 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
 	log.WithFields(log.Fields{"redirectUrl": userData.AppCredentials.RedirectURL}).Info("redirectUrl")
 
+	log.WithFields(log.Fields{"requestUrl": string(aReq.RequestURI())}).Info("requestUrl")
+
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
