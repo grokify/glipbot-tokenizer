@@ -178,6 +178,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	log.WithFields(log.Fields{"clientId": userData.AppCredentials.ClientID}).Info("clientId")
 	log.WithFields(log.Fields{"clientSecret": userData.AppCredentials.ClientSecret}).Info("clientSecret")
 	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
+	log.WithFields(log.Fields{"redirectUrl": userData.AppCredentials.RedirectURL}).Info("redirectUrl")
 
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
