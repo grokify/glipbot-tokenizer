@@ -163,11 +163,10 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 				ju.MustMarshalString(userData, true)),
 		}).Info(cacheKey)
 	}
+	log.WithFields(log.Fields{"cacheKey": cacheKey}).Info("cacheKey")
 
 	authCode := aReq.QueryArgs().GetString("code")
-	log.WithFields(log.Fields{
-		"oauth2": "authCodeReceived",
-	}).Info(authCode)
+	log.WithFields(log.Fields{"authCodeReceived": authCode}).Info("authCodeReceived")
 
 	// Exchange auth code for token
 	userData.AppCredentials = getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
@@ -185,6 +184,8 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	if err = h.setUserData(cacheKey, userData); err != nil {
 		log.Fatal(err)
 	}
+	log.WithFields(log.Fields{"tokenReceived": token.AccessToken}).Info("tokenReceived")
+
 	fmt.Printf("SET TOKEN FOR [%v] [%v]", cacheKey, token.AccessToken)
 	aRes.SetStatusCode(http.StatusOK)
 }
