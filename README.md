@@ -4,6 +4,7 @@
 [![Go Report Card][goreport-svg]][goreport-link]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
+[![Heroku][heroku-svg]][heroku-link]
 
 Helper app to retrieve Glip bot access token.
 
@@ -33,3 +34,5 @@ or
  [docs-godoc-link]: https://godoc.org/github.com/grokify/glipbot-tokenizer
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-link]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
+ [heroku-svg]: https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg?style=flat
+ [heroku-link]: https://heroku.com/deploy
