@@ -1,0 +1,11 @@
+{% func TokenEmail(data EmailData) %}
+<p>Thank you for enabling your Glip bot.</p>
+
+<p>Here is your token:</p>
+
+<p>{%s data.Token.AccessToken %}</p>
+
+<p>Continue your development with the resources at the <a href="https://developer.ringcentral.com">RingCentral and Glip Developer Portal</a>.</p>
+
+<p><a href="https://glip.com">Glipbot</a> Tokenizer by <a href="https://github.com/grokify">grokify</a></p>
+{% endfunc %}
