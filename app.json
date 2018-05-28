@@ -15,6 +15,11 @@
         }
     },
     "env": {
+        "APP_SERVER_URL": {
+            "description": "Your base URL",
+            "value": "https://myapp.herokuapp.com",
+            "required": true
+        },
         "HTTP_ENGINE": {
             "description": "HTTP Engine",
             "value": "nethttp",

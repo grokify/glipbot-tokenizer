@@ -15,6 +15,7 @@ import (
 	ju "github.com/grokify/gotilla/encoding/jsonutil"
 	"github.com/grokify/gotilla/net/anyhttp"
 	hum "github.com/grokify/gotilla/net/httputilmore"
+	uu "github.com/grokify/gotilla/net/urlutil"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 
@@ -23,9 +24,11 @@ import (
 )
 
 const (
-	CookieNameSession = "gbtsession"
-	CookieSalt        = "Trying to get my Glip bot token the easy way!"
-	HeaderXServerURL  = "X-Server-URL"
+	CookieNameSession     = "gbtsession"
+	CookieSalt            = "Trying to get my Glip bot token the easy way!"
+	HeaderXServerURL      = "X-Server-URL"
+	RedirectUriProduction = "/oauth2callback/production"
+	RedirectUriSandbox    = "/oauth2callback/sandbox"
 )
 
 type Handler struct {
@@ -148,7 +151,14 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	}).Info(authCode)
 
 	// Exchange auth code for token
-	userData.AppCredentials.ServerURL = string(aRes.GetHeader(HeaderXServerURL))
+	rcServerUrl := string(aRes.GetHeader(HeaderXServerURL))
+	userData.AppCredentials.ServerURL = rcServerUrl
+	if rcServerUrl == ro.ServerURLProduction {
+		userData.AppCredentials.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
+	} else {
+		userData.AppCredentials.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
+	}
+
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
