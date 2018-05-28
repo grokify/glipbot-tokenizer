@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -10,11 +10,11 @@ import (
 	"strings"
 
 	sp "github.com/SparkPost/gosparkpost"
-	"github.com/grokify/gostor"
-	"github.com/grokify/gostor/redis"
+	//"github.com/grokify/gostor"
+	//"github.com/grokify/gostor/redis"
 	"github.com/grokify/gotilla/config"
-	"github.com/grokify/gotilla/crypto/hash/argon2"
-	ju "github.com/grokify/gotilla/encoding/jsonutil"
+	//"github.com/grokify/gotilla/crypto/hash/argon2"
+	//ju "github.com/grokify/gotilla/encoding/jsonutil"
 	"github.com/grokify/gotilla/net/anyhttp"
 	hum "github.com/grokify/gotilla/net/httputilmore"
 	uu "github.com/grokify/gotilla/net/urlutil"
@@ -26,8 +26,8 @@ import (
 )
 
 const (
-	CookieNameSession     = "gbtsession"
-	CookieSalt            = "Trying to get my Glip bot token the easy way!"
+	//CookieNameSession     = "gbtsession"
+	//CookieSalt            = "Trying to get my Glip bot token the easy way!"
 	HeaderXServerURL      = "X-Server-URL"
 	RedirectUriProduction = "/oauth2callback/production"
 	RedirectUriSandbox    = "/oauth2callback/sandbox"
@@ -35,15 +35,17 @@ const (
 
 type Handler struct {
 	AppPort int
-	Cache   gostor.Client
+	//Cache   gostor.Client
 }
 
+/*
 func createUserCookie(aReq anyhttp.Request) *anyhttp.Cookie {
 	return &anyhttp.Cookie{
 		Name:  CookieNameSession,
 		Value: buildCacheKey(aReq)}
 }
-
+*/
+/*
 func buildCacheKey(aReq anyhttp.Request) string {
 	return argon2.HashSimpleBase32(
 		[]byte(buildCacheKeyRaw(aReq)),
@@ -54,9 +56,9 @@ func buildCacheKey(aReq anyhttp.Request) string {
 func buildCacheKeyRaw(aReq anyhttp.Request) string {
 	return strings.Join([]string{aReq.RemoteAddress(), string(aReq.UserAgent())}, ",")
 }
-
+*/
 func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Request) {
-	aRes.SetCookie(createUserCookie(aReq))
+	//aRes.SetCookie(createUserCookie(aReq))
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.HomePage()))
@@ -67,6 +69,7 @@ type UserData struct {
 	Token          *oauth2.Token             `json:"token,omitempty"`
 }
 
+/*
 func (h *Handler) handleAnyRequestButton(aRes anyhttp.Response, aReq anyhttp.Request) {
 	log.Info("ANY_REQ_PROC1_S1")
 	err := aReq.ParseForm()
@@ -106,7 +109,8 @@ func (h *Handler) handleAnyRequestButton(aRes anyhttp.Response, aReq anyhttp.Req
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.ButtonPage(tmplData)))
 }
-
+*/
+/*
 func (h *Handler) getUserData(key string) (UserData, error) {
 	userData := UserData{}
 	val := h.Cache.GetOrEmptyString(key)
@@ -125,7 +129,7 @@ func (h *Handler) setUserData(cacheKey string, userData UserData) error {
 		return nil
 	}
 }
-
+*/
 func (h *Handler) handleAnyRequestOAuth2CallbackProd(aRes anyhttp.Response, aReq anyhttp.Request) {
 	aRes.SetHeader(HeaderXServerURL, ro.ServerURLProduction)
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
@@ -159,32 +163,34 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	if err != nil {
 		log.WithFields(log.Fields{"Error:": err.Error()}).Info("ERR_PARSE_FORM")
 	}
-	cacheKey := buildCacheKey(aReq)
-	userData, err := h.getUserData(cacheKey)
-	if err != nil {
-		log.WithFields(log.Fields{
-			"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]",
-				cacheKey,
-				ju.MustMarshalString(userData, true)),
-		}).Info(cacheKey)
-	}
-	log.WithFields(log.Fields{"cacheKey": cacheKey}).Info("cacheKey")
+	//cacheKey := buildCacheKey(aReq)
+	/*
+		userData, err := h.getUserData(cacheKey)
+		if err != nil {
+			log.WithFields(log.Fields{
+				"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]",
+					cacheKey,
+					ju.MustMarshalString(userData, true)),
+			}).Info(cacheKey)
+		}
+		log.WithFields(log.Fields{"cacheKey": cacheKey}).Info("cacheKey")
+	*/
 
 	authCode := aReq.QueryArgs().GetString("code")
 	log.WithFields(log.Fields{"authCodeReceived": authCode}).Info("authCodeReceived")
 
 	// Exchange auth code for token
-	userData.AppCredentials = getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
+	appCredentials := getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
 
 	log.WithFields(log.Fields{"authCode": authCode}).Info("authCode")
-	log.WithFields(log.Fields{"clientId": userData.AppCredentials.ClientID}).Info("clientId")
-	log.WithFields(log.Fields{"clientSecret": userData.AppCredentials.ClientSecret}).Info("clientSecret")
+	log.WithFields(log.Fields{"clientId": appCredentials.ClientID}).Info("clientId")
+	log.WithFields(log.Fields{"clientSecret": appCredentials.ClientSecret}).Info("clientSecret")
 	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
-	log.WithFields(log.Fields{"redirectUrl": userData.AppCredentials.RedirectURL}).Info("redirectUrl")
+	log.WithFields(log.Fields{"redirectUrl": appCredentials.RedirectURL}).Info("redirectUrl")
 
 	log.WithFields(log.Fields{"requestUrl": string(aReq.RequestURI())}).Info("requestUrl")
 
-	o2Config := userData.AppCredentials.Config()
+	o2Config := appCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -192,20 +198,22 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 		}).Info(err.Error())
 		return
 	}
-
-	userData.Token = token
-	if err = h.setUserData(cacheKey, userData); err != nil {
-		log.Fatal(err)
-	}
+	/*
+		userData.Token = token
+		if err = h.setUserData(cacheKey, userData); err != nil {
+			log.Fatal(err)
+		}
+	*/
 	log.WithFields(log.Fields{"tokenReceived": token.AccessToken}).Info("tokenReceived")
 
-	fmt.Printf("SET TOKEN FOR [%v] [%v]", cacheKey, token.AccessToken)
+	//fmt.Printf("SET TOKEN FOR [%v] [%v]", cacheKey, token.AccessToken)
 
 	sendTokenEmail(token, aReq.QueryArgs().GetString("email"))
 
 	aRes.SetStatusCode(http.StatusOK)
 }
 
+/*
 func (h *Handler) handleAnyRequestInstalled(aRes anyhttp.Response, aReq anyhttp.Request) {
 	cacheKey := buildCacheKey(aReq)
 	userData, err := h.getUserData(cacheKey)
@@ -230,7 +238,7 @@ func (h *Handler) handleAnyRequestInstalled(aRes anyhttp.Response, aReq anyhttp.
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.InstalledPage(data)))
 }
-
+*/
 func sendTokenEmail(token *oauth2.Token, recipient string) {
 	apiKey := os.Getenv("SPARKPOST_API_KEY")
 	cfg := &sp.Config{
@@ -314,13 +322,14 @@ func main() {
 	}
 
 	handler := Handler{
-		AppPort: port,
+		AppPort: port}
+	/*
 		Cache: redis.NewClient(gostor.Config{
 			Host:        "127.0.0.1",
 			Port:        6379,
 			Password:    "",
 			CustomIndex: 0})}
-
+	*/
 	engine := strings.ToLower(strings.TrimSpace(os.Getenv("HTTP_ENGINE")))
 	if len(engine) == 0 {
 		engine = "nethttp"
