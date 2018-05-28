@@ -7,6 +7,10 @@
 
 Helper app to retrieve Glip bot access token.
 
+This app allows you to retrieve a token without coding OAuth into your app.
+
+Note: this works for private bots only.
+
 ## Installation
 
 ### Deploying to Heroku
