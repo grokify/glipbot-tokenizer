@@ -72,19 +72,21 @@ function buildAndShowRedirectUrl() {
 
     </form>
 
-    <h2>Step 2) Add Redirect URL</h2>
+    <h2>Step 2) Add Your Bot to Glip</h2>
 
     <p>Go to your Developer Portal and click the "Add to Glip" button under:</p>
 
     <p><span class="fixed">Apps</span> > <span class="fixed">$myBot</span> > <span class="fixed">Bot</span> > <span class="fixed">Sandbox / Production</span> > <span class="fixed">Add to Glip</span></p>
 
-    <h2>Step 3) Receive an email with your Access Token</h2>
+    <h2>Step 3) Receive an Email with your Access Token</h2>
 
     <p>You will receive an email with an access token which you can add to your bot.</p>
 
+    <p>At this point, you can build your bot and add the token without needing to implement OAuth in your bot.</p>
+
     <h2>Step 4) Next Steps</h2>
 
-    <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks.</p>
+    <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks to have your bot receive Glip messages.</p>
 
     <hr/>
     <p><a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a></p>
