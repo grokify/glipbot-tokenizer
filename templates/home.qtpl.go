@@ -48,7 +48,7 @@ function buildRedirectUrl() {
   var clientSecret = encodeURIComponent(document.getElementById("clientSecret").value);
   var email = encodeURIComponent(document.getElementById("email").value);
 
-  var queryString = '&clientId=' + clientId + '&clientSecret=' + clientSecret + '&email=' + email;
+  var queryString = '?clientId=' + clientId + '&clientSecret=' + clientSecret + '&email=' + email;
 
   return url + queryString
 }
