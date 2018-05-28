@@ -15,11 +15,6 @@
         }
     },
     "env": {
-        "HUBOT_GLIP_SERVER": {
-            "description": "Glip API server URL",
-            "value": "https://platform.ringcentral.com",
-            "required": true
-        },
         "HTTP_ENGINE": {
             "description": "HTTP Engine",
             "value": "nethttp",
