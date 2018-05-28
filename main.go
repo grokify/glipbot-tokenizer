@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	sp "github.com/SparkPost/gosparkpost"
 	"github.com/grokify/gostor"
 	"github.com/grokify/gostor/redis"
 	"github.com/grokify/gotilla/config"
@@ -175,6 +176,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	// Exchange auth code for token
 	userData.AppCredentials = getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
 
+	log.WithFields(log.Fields{"authCode": authCode}).Info("authCode")
 	log.WithFields(log.Fields{"clientId": userData.AppCredentials.ClientID}).Info("clientId")
 	log.WithFields(log.Fields{"clientSecret": userData.AppCredentials.ClientSecret}).Info("clientSecret")
 	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
@@ -198,6 +200,9 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	log.WithFields(log.Fields{"tokenReceived": token.AccessToken}).Info("tokenReceived")
 
 	fmt.Printf("SET TOKEN FOR [%v] [%v]", cacheKey, token.AccessToken)
+
+	sendTokenEmail(token, aReq.QueryArgs().GetString("email"))
+
 	aRes.SetStatusCode(http.StatusOK)
 }
 
@@ -224,6 +229,36 @@ func (h *Handler) handleAnyRequestInstalled(aRes anyhttp.Response, aReq anyhttp.
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.InstalledPage(data)))
+}
+
+func sendTokenEmail(token *oauth2.Token, recipient string) {
+	apiKey := os.Getenv("SPARKPOST_API_KEY")
+	cfg := &sp.Config{
+		BaseUrl:    "https://api.sparkpost.com",
+		ApiKey:     apiKey,
+		ApiVersion: 1,
+	}
+	var client sp.Client
+	err := client.Init(cfg)
+	if err != nil {
+		log.Fatalf("SparkPost client init failed: %s\n", err)
+	}
+
+	// Create a Transmission using an inline Recipient List
+	// and inline email Content.
+	emailData := templates.EmailData{Token: token}
+	tx := &sp.Transmission{
+		Recipients: []string{recipient},
+		Content: sp.Content{
+			HTML:    templates.TokenEmail(emailData),
+			From:    os.Getenv("SPARKPOST_EMAIL_SENDER"),
+			Subject: "Your Glip Bot Token is here."}}
+
+	id, _, err := client.Send(tx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.WithFields(log.Fields{"email-id": id}).Info("email")
 }
 
 func serveNetHttp(h Handler) {

@@ -20,6 +20,16 @@
             "value": "https://myapp.herokuapp.com",
             "required": true
         },
+        "SPARKPOST_API_KEY": {
+            "description": "Your SparkPost API Key (https://sparkpost.com)",
+            "value": "",
+            "required": true
+        },
+        "SPARKPOST_EMAIL_SENDER": {
+            "description": "Your sender email",
+            "value": "",
+            "required": true
+        },       
         "HTTP_ENGINE": {
             "description": "HTTP Engine",
             "value": "nethttp",

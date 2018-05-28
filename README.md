@@ -26,6 +26,15 @@ or
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+## Configuration
+
+| Environment Variable | Required | Description |
+|----------------------|----------|-------------|
+| `APP_SERVER_URL`     | y | Base URL for your server, e.g. `https://myapp.herokuapp.com` |
+| `SPARKPOST_API_KEY`  | y | Your SparkPost API Key (https://sparkpost.com) to send email |
+| `SPARKPOST_EMAIL_SENDER` | y | Your sender email address. The domain must be verified by SparkPost |
+| `HTTP_ENGINE` | n | HTTP engine. Currently `nethttp` is supported |
+
 ## Notes
 
 ### Maintenance
