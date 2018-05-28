@@ -12,6 +12,7 @@ import (
 	"github.com/grokify/gostor/redis"
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/crypto/hash/argon2"
+	ju "github.com/grokify/gotilla/encoding/jsonutil"
 	"github.com/grokify/gotilla/net/anyhttp"
 	hum "github.com/grokify/gotilla/net/httputilmore"
 	log "github.com/sirupsen/logrus"
@@ -124,7 +125,9 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	userData, err := h.getUserData(cacheKey)
 	if err != nil {
 		log.WithFields(log.Fields{
-			"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]", cacheKey),
+			"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]",
+				cacheKey,
+				ju.MustMarshalString(userData, true)),
 		}).Info(cacheKey)
 	}
 
@@ -156,7 +159,9 @@ func (h *Handler) handleAnyRequestInstalled(aRes anyhttp.Response, aReq anyhttp.
 	userData, err := h.getUserData(cacheKey)
 	if err != nil {
 		log.WithFields(log.Fields{
-			"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]", cacheKey),
+			"cache": fmt.Sprintf("Cannot retrieve Cache for [%v] [%v]",
+				cacheKey,
+				ju.MustMarshalString(userData, true)),
 		}).Info(cacheKey)
 	}
 
