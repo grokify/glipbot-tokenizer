@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -134,6 +135,24 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
+func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationCredentials {
+	appCreds := ro.ApplicationCredentials{
+		ServerURL:    rcServerUrl,
+		ClientID:     aReq.QueryArgs().GetString("clientId"),
+		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
+	if rcServerUrl == ro.ServerURLProduction {
+		appCreds.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
+	} else {
+		appCreds.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
+	}
+	v := url.Values{}
+	v.Add("clientId", appCreds.ClientID)
+	v.Add("clientSecret", appCreds.ClientSecret)
+	v.Add("eamil", aReq.QueryArgs().GetString("eamil"))
+	appCreds.RedirectURL += "?" + v.Encode()
+	return appCreds
+}
+
 func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq anyhttp.Request) {
 	cacheKey := buildCacheKey(aReq)
 	userData, err := h.getUserData(cacheKey)
@@ -151,13 +170,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	}).Info(authCode)
 
 	// Exchange auth code for token
-	rcServerUrl := string(aRes.GetHeader(HeaderXServerURL))
-	userData.AppCredentials.ServerURL = rcServerUrl
-	if rcServerUrl == ro.ServerURLProduction {
-		userData.AppCredentials.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
-	} else {
-		userData.AppCredentials.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
-	}
+	userData.AppCredentials = getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
 
 	o2Config := userData.AppCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
