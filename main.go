@@ -264,15 +264,6 @@ func sendTokenEmail(token *oauth2.Token, recipient string) {
 func serveNetHttp(h Handler) {
 	log.Info("STARTING_NET_HTTP")
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestHome(anyhttp.NewResReqNetHttp(w, r))
-	}))
-	mux.HandleFunc("/button", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestButton(anyhttp.NewResReqNetHttp(w, r))
-	}))
-	mux.HandleFunc("/button/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestButton(anyhttp.NewResReqNetHttp(w, r))
-	}))
 	mux.HandleFunc("/oauth2callback/production", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHttp(w, r))
 	}))
@@ -285,12 +276,24 @@ func serveNetHttp(h Handler) {
 	mux.HandleFunc("/oauth2callback/sandbox/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
 	}))
-	mux.HandleFunc("/installed", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestInstalled(anyhttp.NewResReqNetHttp(w, r))
-	}))
-	mux.HandleFunc("/installed/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestInstalled(anyhttp.NewResReqNetHttp(w, r))
-	}))
+	/*
+		mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h.handleAnyRequestHome(anyhttp.NewResReqNetHttp(w, r))
+		}))
+		mux.HandleFunc("/button", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h.handleAnyRequestButton(anyhttp.NewResReqNetHttp(w, r))
+		}))
+		mux.HandleFunc("/button/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h.handleAnyRequestButton(anyhttp.NewResReqNetHttp(w, r))
+		}))
+
+		mux.HandleFunc("/installed", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h.handleAnyRequestInstalled(anyhttp.NewResReqNetHttp(w, r))
+		}))
+		mux.HandleFunc("/installed/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h.handleAnyRequestInstalled(anyhttp.NewResReqNetHttp(w, r))
+		}))
+	*/
 	done := make(chan bool)
 	go http.ListenAndServe(fmt.Sprintf(":%v", h.AppPort), mux)
 	log.Printf("Server listening on port %v", h.AppPort)
