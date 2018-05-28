@@ -148,7 +148,7 @@ func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationC
 	v := url.Values{}
 	v.Add("clientId", appCreds.ClientID)
 	v.Add("clientSecret", appCreds.ClientSecret)
-	v.Add("eamil", aReq.QueryArgs().GetString("eamil"))
+	v.Add("email", aReq.QueryArgs().GetString("email"))
 	appCreds.RedirectURL += "?" + v.Encode()
 	return appCreds
 }
