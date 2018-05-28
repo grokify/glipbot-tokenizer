@@ -1,0 +1,29 @@
+{
+    "name": "Glipbot Tokenizer",
+    "description": "Easily create tokens for your bots",
+    "keywords": ["Glip", "token"],
+    "website": "https://glipbot-tokenizer.herokuapp.com",
+    "repository": "https://github.com/grokify/glipbot-tokenizer",
+    "addons": [
+        "redistogo:nano",
+        "papertrail:choklad"
+    ],
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "Free"
+        }
+    },
+    "env": {
+        "HUBOT_GLIP_SERVER": {
+            "description": "Glip API server URL",
+            "value": "https://platform.ringcentral.com",
+            "required": true
+        },
+        "HTTP_ENGINE": {
+            "description": "HTTP Engine",
+            "value": "nethttp",
+            "required": true
+        }
+    }
+}
