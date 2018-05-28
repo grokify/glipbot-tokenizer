@@ -7,6 +7,16 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/SparkPost/gosparkpost",
+			"Comment": "0.1.0-62-gec2c207",
+			"Rev": "ec2c207794ac7c11a6d86dacd01ec41e86a759d3"
+		},
+		{
+			"ImportPath": "github.com/SparkPost/gosparkpost/events",
+			"Comment": "0.1.0-62-gec2c207",
+			"Rev": "ec2c207794ac7c11a6d86dacd01ec41e86a759d3"
+		},
+		{
 			"ImportPath": "github.com/caarlos0/env",
 			"Comment": "v3.3.0-4-g3e0f30c",
 			"Rev": "3e0f30cbf50bb82273cf60e7bb70869f4852e9b8"
