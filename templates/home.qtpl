@@ -1,0 +1,50 @@
+{% func HomePage() %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+  </head>
+  <script type="text/javascript">
+
+// https://stackoverflow.com/questions/4907843/open-a-url-in-a-new-tab-and-not-a-new-window-using-javascript
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
+
+function openGlipBot(appId) {
+  if (appId.length == 0) {
+    alert("Please enter your Application Id");
+    return;
+  }
+  var url = 'https://www.ringcentral.com/apps/' + appId + 
+    '/install?landing_url=https%3A%2F%2Fglipbot-tokenizer.herokuapp.com%2Faccess_token';
+  openInNewTab(url);
+}
+
+  </script>
+  <body>
+    <h1>Glip bot Tokenizer</h1>
+
+    <p>Get your private Glip bot token.</p>
+
+    <form action="/button" method="post">
+
+      <p><input type="text" id="appId" name="appId" value="" placeholder="Your Bot App Id" style="width:400px" /></p>
+      <p><input type="text" id="clientId" name="clientId" value="" placeholder="Your Bot Client Id" style="width:400px" /></p>
+      <p><input type="text" id="clientSecret" name="clientSecret" value="" placeholder="Your Bot Client Secret" style="width:400px" /></p>
+      <p><select name="serverUrl">
+      <option value="https://platform.ringcentral.com">https://platform.ringcentral.com</option>
+      <option value="https://platform.devtest.ringcentral.com">https://platform.devtest.ringcentral.com</option>
+      </select></p>
+
+      <input type="submit" value="Next" />
+
+    </form>
+
+    <hr/>
+    <a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a>
+  </body>
+</html>
+{% endfunc %}

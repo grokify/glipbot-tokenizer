@@ -1,0 +1,18 @@
+{% func ButtonPage(data ButtonData) %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+  </head>  <body>
+    <h1>Glip bot Tokenizer</h1>
+
+    <p>Install your Glip Bot</p>
+
+	<div style="margin-top:1em"><a href="https://www.ringcentral.com/apps/{%s data.ApplicationID %}/install?landing_url=https%3A%2F%2Fglipbot-tokenizer.herokuapp.com%2Faccess_token" style="box-sizing:border-box;display: inline-block;border: 1px solid #0073ae;border-radius: 4px;text-decoration: none;height: 60px;line-height: 60px;width: 160px;padding-left: 20px;font-size: 14px;color:#0073ae;font-family:"Lato",Helvetica,Arial,sans-serif"><span>Add to </span><img style="width: 68px;vertical-align: middle;display: inline-block;margin-left: 10px;" src="https://netstorage.ringcentral.com/dpw/common/glip/logo_glip.png"></a></div>
+
+    <hr/>
+    <a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a>
+  </body>
+</html>
+{% endfunc %}
