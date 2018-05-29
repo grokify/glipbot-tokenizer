@@ -42,7 +42,7 @@ function buildAndShowRedirectUrl() {
     <h1>Glip Bot Tokenizer</h1>
     <p><a href="https://glipbot-tokenizer.herokuapp.com">https://glipbot-tokenizer.herokuapp.com</a></p>
 
-    <p>Easily get your permanent Glip bot access token.</p>
+    <p>Easily get your private Glip bot access token without OAuth.</p>
 
     <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
 
@@ -67,7 +67,7 @@ function buildAndShowRedirectUrl() {
       <p><input type="text" id="clientSecret" name="clientSecret" value="" placeholder="Your Bot Client Secret" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
       <p><input type="text" id="email" name="email" value="" placeholder="Email address to deliver your token" style="width:400px" onchange="buildAndShowRedirectUrl()" /> Required</p>
 
-      <p>Your Redirect URL:</p>
+      <p>Your Redirect URL (be sure to verify):</p>
       <textarea id="redirectUrl" class="code"></textarea>
 
     </form>
@@ -86,7 +86,7 @@ function buildAndShowRedirectUrl() {
 
     <h2>Next Steps</h2>
 
-    <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks to have your bot receive Glip messages.</p>
+    <p>You can now use your token with <a href="https://github.com/grokify/rchooks">rchooks</a> CLI app to create and manage your webhooks to have your bot receive Glip messages.</p>
 
     <hr/>
     <p><a href="https://github.com/grokify/glipbot-tokenizer">https://github.com/grokify/glipbot-tokenizer</a></p>
