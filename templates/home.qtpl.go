@@ -96,6 +96,10 @@ function buildAndShowRedirectUrl() {
       <p>Your Redirect URL (be sure to verify):</p>
       <textarea id="redirectUrl" class="code"></textarea>
 
+      <p>Add this URL to your bot in the <a href="https://developer.ringcentral.com">Developer Portal</a> under:</p>
+
+      <p><span class="fixed">Apps</span> > <span class="fixed">$myBot</span> > <span class="fixed">Settings</span> > <span class="fixed">OAuth Settings</span> > <span class="fixed">OAuth Redirect URI</span></p>
+
     </form>
 
     <h2>Step 2) Add Your Bot to Glip</h2>
@@ -122,31 +126,31 @@ function buildAndShowRedirectUrl() {
   </body>
 </html>
 `)
-//line home.qtpl:98
+//line home.qtpl:102
 }
 
-//line home.qtpl:98
+//line home.qtpl:102
 func WriteHomePage(qq422016 qtio422016.Writer, data HomeData) {
-	//line home.qtpl:98
+	//line home.qtpl:102
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line home.qtpl:98
+	//line home.qtpl:102
 	StreamHomePage(qw422016, data)
-	//line home.qtpl:98
+	//line home.qtpl:102
 	qt422016.ReleaseWriter(qw422016)
-//line home.qtpl:98
+//line home.qtpl:102
 }
 
-//line home.qtpl:98
+//line home.qtpl:102
 func HomePage(data HomeData) string {
-	//line home.qtpl:98
+	//line home.qtpl:102
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line home.qtpl:98
+	//line home.qtpl:102
 	WriteHomePage(qb422016, data)
-	//line home.qtpl:98
+	//line home.qtpl:102
 	qs422016 := string(qb422016.B)
-	//line home.qtpl:98
+	//line home.qtpl:102
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line home.qtpl:98
+	//line home.qtpl:102
 	return qs422016
-//line home.qtpl:98
+//line home.qtpl:102
 }

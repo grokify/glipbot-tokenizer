@@ -70,6 +70,10 @@ function buildAndShowRedirectUrl() {
       <p>Your Redirect URL (be sure to verify):</p>
       <textarea id="redirectUrl" class="code"></textarea>
 
+      <p>Add this URL to your bot in the <a href="https://developer.ringcentral.com">Developer Portal</a> under:</p>
+
+      <p><span class="fixed">Apps</span> > <span class="fixed">$myBot</span> > <span class="fixed">Settings</span> > <span class="fixed">OAuth Settings</span> > <span class="fixed">OAuth Redirect URI</span></p>
+
     </form>
 
     <h2>Step 2) Add Your Bot to Glip</h2>
