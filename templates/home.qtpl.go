@@ -72,7 +72,7 @@ function buildAndShowRedirectUrl() {
 
     <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
 
-    <h2>Step 0) Prerequisites</h2>
+    <h2>Prerequisites</h2>
 
     <p>Create an app in the RingCentral Developer Portal (<a href="https://developer.ringcentral.com">https://developer.ringcentral.com</a>)</p>
     <p>Select Platform Type: <span class="fixed">Server/Bot</span></p>
@@ -110,7 +110,7 @@ function buildAndShowRedirectUrl() {
 
     <p>At this point, you can build your bot and add the token without needing to implement OAuth in your bot.</p>
 
-    <h2>Step 4) Next Steps</h2>
+    <h2>Next Steps</h2>
 
     <p>You can now use your token with <a href="https://github.com/rchooks">rchooks</a> CLI app to create and manage your webhooks to have your bot receive Glip messages.</p>
 
