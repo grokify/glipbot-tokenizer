@@ -10,13 +10,16 @@
 
 Helper app to retrieve Glip bot access token.
 
-Use online at: [https://glipbot-tokenizer.herokuapp.com](https://glipbot-tokenizer.herokuapp.com).
-
 This app allows you to retrieve a token without coding OAuth into your app.
+
+* Online Service: [https://glipbot-tokenizer.herokuapp.com](https://glipbot-tokenizer.herokuapp.com).
+* YouTube Video: https://youtu.be/A7T7xDGV5vU
 
 Note: this works for private bots only.
 
 ## Installation
+
+Note: if you just want to retrieve a token for your bot, you can simply use the [online service](https://glipbot-tokenizer.herokuapp.com). The below is if you want to host your own version of Glipbot Tokenizer.
 
 ### Deploying to Heroku
 
