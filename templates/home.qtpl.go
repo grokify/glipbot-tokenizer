@@ -70,6 +70,7 @@ function buildAndShowRedirectUrl() {
 
     <p>Easily get your private Glip bot access token without OAuth.</p>
 
+    <p>YouTube Tutorial Video: <a href="https://youtu.be/A7T7xDGV5vU">https://youtu.be/A7T7xDGV5vU</a></p>
     <p>Code for this project is available here: <a href="https://github.com/grokify/glipbot-tokenizer">grokify/glipbot-tokenizer</a></p>
 
     <h2>Prerequisites</h2>
@@ -126,31 +127,31 @@ function buildAndShowRedirectUrl() {
   </body>
 </html>
 `)
-//line home.qtpl:102
+//line home.qtpl:103
 }
 
-//line home.qtpl:102
+//line home.qtpl:103
 func WriteHomePage(qq422016 qtio422016.Writer, data HomeData) {
-	//line home.qtpl:102
+	//line home.qtpl:103
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line home.qtpl:102
+	//line home.qtpl:103
 	StreamHomePage(qw422016, data)
-	//line home.qtpl:102
+	//line home.qtpl:103
 	qt422016.ReleaseWriter(qw422016)
-//line home.qtpl:102
+//line home.qtpl:103
 }
 
-//line home.qtpl:102
+//line home.qtpl:103
 func HomePage(data HomeData) string {
-	//line home.qtpl:102
+	//line home.qtpl:103
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line home.qtpl:102
+	//line home.qtpl:103
 	WriteHomePage(qb422016, data)
-	//line home.qtpl:102
+	//line home.qtpl:103
 	qs422016 := string(qb422016.B)
-	//line home.qtpl:102
+	//line home.qtpl:103
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line home.qtpl:102
+	//line home.qtpl:103
 	return qs422016
-//line home.qtpl:102
+//line home.qtpl:103
 }
