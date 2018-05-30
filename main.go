@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -77,7 +79,9 @@ func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationC
 func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq anyhttp.Request) {
 	err := aReq.ParseForm()
 	if err != nil {
-		log.WithFields(log.Fields{"Error:": err.Error()}).Info("ERR_PARSE_FORM")
+		log.WithFields(log.Fields{"error": err.Error()}).Info("ERR_PARSE_FORM")
+		aRes.SetStatusCode(http.StatusBadRequest)
+		return
 	}
 
 	authCode := aReq.QueryArgs().GetString("code")
@@ -86,23 +90,23 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 	// Exchange auth code for token
 	appCredentials := getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
 
-	log.WithFields(log.Fields{"authCode": authCode}).Info("authCode")
-	log.WithFields(log.Fields{"clientId": appCredentials.ClientID}).Info("clientId")
-	log.WithFields(log.Fields{"email": aReq.QueryArgs().GetString("email")}).Info("email")
-	log.WithFields(log.Fields{"redirectUrl": appCredentials.RedirectURL}).Info("redirectUrl")
-
-	log.WithFields(log.Fields{"requestUrl": string(aReq.RequestURI())}).Info("requestUrl")
+	log.WithFields(log.Fields{
+		"authCode":    authCode,
+		"clientId":    appCredentials.ClientID,
+		"email":       aReq.QueryArgs().GetString("email"),
+		"redirectUrl": appCredentials.RedirectURL,
+		"requestUrl":  string(aReq.RequestURI()),
+	}).Info("authCode")
 
 	o2Config := appCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
-		log.WithFields(log.Fields{
-			"oauth2": "tokenExchangeError",
-		}).Info(err.Error())
+		log.WithFields(log.Fields{"error": err.Error()}).Info("OAuth2CodeToTokenExchangeError")
+		aRes.SetStatusCode(http.StatusBadRequest)
 		return
 	}
 
-	log.WithFields(log.Fields{"tokenReceived": token.AccessToken}).Info("tokenReceived")
+	log.WithFields(log.Fields{"token": token.AccessToken}).Info("tokenReceived")
 
 	sendTokenEmail(token, aReq.QueryArgs().GetString("email"))
 
@@ -112,8 +116,17 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 func sendTokenEmail(token *oauth2.Token, recipient string) {
 	client, err := sparkpost.NewApiClient(os.Getenv("SPARKPOST_API_KEY"))
 	if err != nil {
-		log.WithFields(log.Fields{"error": err.Error()}).Warn("Email")
+		log.WithFields(log.Fields{"stage": "get email client", "error": err.Error()}).Warn("Email")
 	}
+
+	data, err := json.MarshalIndent(token, "", "  ")
+	if err != nil {
+		log.WithFields(log.Fields{"stage": "marshal token", "error": err.Error()}).Warn("Email")
+	}
+	attach := sp.Attachment{
+		MIMEType: hum.ContentTypeTextPlainUtf8,
+		Filename: "token.json.txt",
+		B64Data:  base64.StdEncoding.EncodeToString(data)}
 
 	// Create a Transmission using an inline Recipient List
 	// and inline email Content.
@@ -121,9 +134,10 @@ func sendTokenEmail(token *oauth2.Token, recipient string) {
 	tx := &sp.Transmission{
 		Recipients: []string{recipient},
 		Content: sp.Content{
-			HTML:    templates.TokenEmail(emailData),
-			From:    os.Getenv("SPARKPOST_EMAIL_SENDER"),
-			Subject: "Your Glip Bot Token is here."}}
+			HTML:        templates.TokenEmail(emailData),
+			From:        os.Getenv("SPARKPOST_EMAIL_SENDER"),
+			Subject:     "Your Glip Bot Token is here.",
+			Attachments: []sp.Attachment{attach}}}
 
 	id, _, err := client.Send(tx)
 	if err != nil {

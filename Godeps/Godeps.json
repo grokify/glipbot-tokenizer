@@ -27,59 +27,59 @@
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/config",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/crypto/hash/argon2",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/io/ioutilmore",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/net/anyhttp",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/net/httputilmore",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/net/urlutil",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/os/osutil",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/strconv/strconvutil",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/gotilla/time/timeutil",
-			"Rev": "795eae31d28dad570d45714a480d3ae22ba8e224"
+			"Rev": "b622ad1bcc5c752a0caffdf898355c15a53ce626"
 		},
 		{
 			"ImportPath": "github.com/grokify/oauth2more",
-			"Comment": "v0.2.0-61-ge3744a4",
-			"Rev": "e3744a41f71f7d5ec5c49f15e30c834d7749320e"
+			"Comment": "v0.2.0-63-ga682108",
+			"Rev": "a6821083cbbc1b8475bf455c3af5dc9e79f580b0"
 		},
 		{
 			"ImportPath": "github.com/grokify/oauth2more/ringcentral",
-			"Comment": "v0.2.0-61-ge3744a4",
-			"Rev": "e3744a41f71f7d5ec5c49f15e30c834d7749320e"
+			"Comment": "v0.2.0-63-ga682108",
+			"Rev": "a6821083cbbc1b8475bf455c3af5dc9e79f580b0"
 		},
 		{
 			"ImportPath": "github.com/grokify/oauth2more/scim",
-			"Comment": "v0.2.0-61-ge3744a4",
-			"Rev": "e3744a41f71f7d5ec5c49f15e30c834d7749320e"
+			"Comment": "v0.2.0-63-ga682108",
+			"Rev": "a6821083cbbc1b8475bf455c3af5dc9e79f580b0"
 		},
 		{
 			"ImportPath": "github.com/grokify/oauth2more/sparkpost",
-			"Comment": "v0.2.0-61-ge3744a4",
-			"Rev": "e3744a41f71f7d5ec5c49f15e30c834d7749320e"
+			"Comment": "v0.2.0-63-ga682108",
+			"Rev": "a6821083cbbc1b8475bf455c3af5dc9e79f580b0"
 		},
 		{
 			"ImportPath": "github.com/joho/godotenv",
