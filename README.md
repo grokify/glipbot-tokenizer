@@ -5,7 +5,7 @@
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 [![Heroku][heroku-svg]][heroku-link]
-[![YouTube][video-svg]][video-link]
+[![Video][video-svg]][video-link]
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-url]
 [![Chat][chat-svg]][chat-url]
 
@@ -14,7 +14,7 @@ Helper app to retrieve Glip bot access token.
 This app allows you to retrieve a token without coding OAuth into your app.
 
 * Online Service: [https://glipbot-tokenizer.herokuapp.com](https://glipbot-tokenizer.herokuapp.com).
-* YouTube Video: [https://youtu.be/A7T7xDGV5vU](https://youtu.be/A7T7xDGV5vU)
+* YouTube Tutorial Video: [https://youtu.be/A7T7xDGV5vU](https://youtu.be/A7T7xDGV5vU)
 
 Note: this works for private bots only.
 
