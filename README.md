@@ -5,6 +5,7 @@
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 [![Heroku][heroku-svg]][heroku-link]
+[![YouTube][video-svg]][video-link]
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-url]
 [![Chat][chat-svg]][chat-url]
 
@@ -68,6 +69,8 @@ More information on deploying Go on Heroku here:
  [license-link]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
  [heroku-svg]: https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg?style=flat
  [heroku-link]: https://heroku.com/deploy
+ [video-svg]: https://img.shields.io/badge/YouTube-tutorial-red.svg
+ [video-link]: https://youtu.be/A7T7xDGV5vU
  [chat-svg]: https://img.shields.io/badge/%F0%9F%92%AC_Chat_on-Glip-orange.svg?style=flat
  [chat-url]: https://glipped.herokuapp.com/
  [stackoverflow-svg]: https://img.shields.io/badge/stack%20overflow-ringcentral-orange.svg
