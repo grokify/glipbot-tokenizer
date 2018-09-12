@@ -13,7 +13,7 @@ Helper app to retrieve Glip bot access token.
 
 This app allows you to retrieve a token without coding OAuth into your app.
 
-* Online Service: [https://glipbot-tokenizer.herokuapp.com](https://glipbot-tokenizer.herokuapp.com).
+* Online Service: [https://glipbot-tokenizer.herokuapp.com](https://glipbot-tokenizer.herokuapp.com)
 * YouTube Tutorial Video: [https://youtu.be/A7T7xDGV5vU](https://youtu.be/A7T7xDGV5vU)
 
 Note: this works for private bots only.
@@ -67,7 +67,7 @@ More information on deploying Go on Heroku here:
  [docs-godoc-link]: https://godoc.org/github.com/grokify/glipbot-tokenizer
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-link]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
- [heroku-svg]: https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg?style=flat
+ [heroku-svg]: https://img.shields.io/badge/%E2%86%91_deploy-Heroku-7056bf.svg?style=flat
  [heroku-link]: https://heroku.com/deploy
  [video-svg]: https://img.shields.io/badge/YouTube-tutorial-red.svg
  [video-link]: https://youtu.be/A7T7xDGV5vU
