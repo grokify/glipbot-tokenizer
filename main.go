@@ -10,11 +10,11 @@ import (
 	"strconv"
 
 	sp "github.com/SparkPost/gosparkpost"
-	"github.com/grokify/gotilla/config"
-	"github.com/grokify/gotilla/net/anyhttp"
-	hum "github.com/grokify/gotilla/net/httputilmore"
-	uu "github.com/grokify/gotilla/net/urlutil"
 	"github.com/grokify/oauth2more/sparkpost"
+	"github.com/grokify/simplego/config"
+	"github.com/grokify/simplego/net/anyhttp"
+	hum "github.com/grokify/simplego/net/httputilmore"
+	uu "github.com/grokify/simplego/net/urlutil"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 
