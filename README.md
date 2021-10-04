@@ -1,11 +1,11 @@
 # Glipbot Tokenizer
 
-[![Build Status][build-status-svg]][build-status-link]
-[![Go Report Card][goreport-svg]][goreport-link]
-[![Docs][docs-godoc-svg]][docs-godoc-link]
-[![License][license-svg]][license-link]
-[![Heroku][heroku-svg]][heroku-link]
-[![Video][video-svg]][video-link]
+[![Build Status][build-status-svg]][build-status-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![License][license-svg]][license-url]
+[![Heroku][heroku-svg]][heroku-url]
+[![Video][video-svg]][video-url]
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-url]
 [![Chat][chat-svg]][chat-url]
 
@@ -47,18 +47,18 @@ More information on deploying Go on Heroku here:
 | `SPARKPOST_EMAIL_SENDER` | y | Your sender email address. The domain must be verified by SparkPost |
 | `HTTP_ENGINE` | n | HTTP engine. Currently `nethttp` is supported |
 
- [build-status-svg]: https://api.travis-ci.org/grokify/glipbot-tokenizer.svg?branch=master
- [build-status-link]: https://travis-ci.org/grokify/glipbot-tokenizer
+ [build-status-svg]: https://github.com/grokify/glipbot-tokenizer/workflows/go%20build/badge.svg?branch=master
+ [build-status-url]: https://github.com/grokify/glipbot-tokenizer/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/glipbot-tokenizer
- [goreport-link]: https://goreportcard.com/report/github.com/grokify/glipbot-tokenizer
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/glipbot-tokenizer
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/glipbot-tokenizer
+ [docs-godoc-url]: https://godoc.org/github.com/grokify/glipbot-tokenizer
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-link]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
+ [license-url]: https://github.com/grokify/glipbot-tokenizer/blob/master/LICENSE.md
  [heroku-svg]: https://img.shields.io/badge/%E2%86%91_deploy-Heroku-7056bf.svg?style=flat
- [heroku-link]: https://heroku.com/deploy
+ [heroku-url]: https://heroku.com/deploy
  [video-svg]: https://img.shields.io/badge/YouTube-tutorial-red.svg
- [video-link]: https://youtu.be/A7T7xDGV5vU
+ [video-url]: https://youtu.be/A7T7xDGV5vU
  [chat-svg]: https://img.shields.io/badge/%F0%9F%92%AC_Chat_on-Glip-orange.svg?style=flat
  [chat-url]: https://glipped.herokuapp.com/
  [stackoverflow-svg]: https://img.shields.io/badge/stack%20overflow-ringcentral-orange.svg
