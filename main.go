@@ -15,8 +15,10 @@ import (
 	"github.com/grokify/simplego/net/anyhttp"
 	hum "github.com/grokify/simplego/net/httputilmore"
 	uu "github.com/grokify/simplego/net/urlutil"
-	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
+
+	"github.com/rs/zerolog/log"
+	//	log "github.com/sirupsen/logrus"
 
 	"github.com/grokify/glipbot-tokenizer/templates"
 	ro "github.com/grokify/oauth2more/ringcentral"
@@ -34,7 +36,9 @@ type Handler struct {
 }
 
 func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Request) {
-	log.WithFields(log.Fields{"handler": "handleAnyRequestHome"}).Info("StartHandler")
+	log.Info().
+		Str("handler", "handleAnyRequestHome").
+		Msg("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.HomePage(
@@ -47,13 +51,17 @@ type UserData struct {
 }
 
 func (h *Handler) handleAnyRequestOAuth2CallbackProd(aRes anyhttp.Response, aReq anyhttp.Request) {
-	log.WithFields(log.Fields{"handler": "handleAnyRequestOAuth2CallbackProd"}).Info("StartHandler")
+	log.Info().
+		Str("handler", "handleAnyRequestOAuth2CallbackProd").
+		Msg("StartHandler")
 	aRes.SetHeader(HeaderXServerURL, ro.ServerURLProduction)
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
 func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq anyhttp.Request) {
-	log.WithFields(log.Fields{"handler": "handleAnyRequestOAuth2CallbackSand"}).Info("StartHandler")
+	log.Info().
+		Str("handler", "handleAnyRequestOAuth2CallbackSand").
+		Msg("StartHandler")
 	aRes.SetHeader(HeaderXServerURL, ro.ServerURLSandbox)
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
@@ -79,34 +87,42 @@ func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationC
 func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq anyhttp.Request) {
 	err := aReq.ParseForm()
 	if err != nil {
-		log.WithFields(log.Fields{"error": err.Error()}).Info("ERR_PARSE_FORM")
+		log.Warn().
+			Err(err).
+			Msg("ERR_PARSE_FORM")
 		aRes.SetStatusCode(http.StatusBadRequest)
 		return
 	}
 
 	authCode := aReq.QueryArgs().GetString("code")
-	log.WithFields(log.Fields{"authCodeReceived": authCode}).Info("authCodeReceived")
+	log.Info().
+		Str("authCodeReceived", authCode).
+		Msg("authCodeReceived")
 
 	// Exchange auth code for token
 	appCredentials := getAppCredentials(aReq, string(aRes.GetHeader(HeaderXServerURL)))
 
-	log.WithFields(log.Fields{
-		"authCode":    authCode,
-		"clientId":    appCredentials.ClientID,
-		"email":       aReq.QueryArgs().GetString("email"),
-		"redirectUrl": appCredentials.RedirectURL,
-		"requestUrl":  string(aReq.RequestURI()),
-	}).Info("authCode")
+	log.Info().
+		Str("authCode", authCode).
+		Str("clientId", appCredentials.ClientID).
+		Str("email", aReq.QueryArgs().GetString("email")).
+		Str("redirectUrl", appCredentials.RedirectURL).
+		Str("requestUrl", string(aReq.RequestURI())).
+		Msg("authCode")
 
 	o2Config := appCredentials.Config()
 	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
-		log.WithFields(log.Fields{"error": err.Error()}).Info("OAuth2CodeToTokenExchangeError")
+		log.Warn().
+			Err(err).
+			Msg("OAuth2CodeToTokenExchangeError")
 		aRes.SetStatusCode(http.StatusBadRequest)
 		return
 	}
 
-	log.WithFields(log.Fields{"token": token.AccessToken}).Info("tokenReceived")
+	log.Info().
+		Str("token", token.AccessToken).
+		Msg("tokenReceived")
 
 	sendTokenEmail(token, aReq.QueryArgs().GetString("email"))
 
@@ -116,12 +132,18 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 func sendTokenEmail(token *oauth2.Token, recipient string) {
 	client, err := sparkpost.NewApiClient(os.Getenv("SPARKPOST_API_KEY"))
 	if err != nil {
-		log.WithFields(log.Fields{"stage": "get email client", "error": err.Error()}).Warn("Email")
+		log.Warn().
+			Err(err).
+			Str("stage", "get email client").
+			Msg("email")
 	}
 
 	data, err := json.MarshalIndent(token, "", "  ")
 	if err != nil {
-		log.WithFields(log.Fields{"stage": "marshal token", "error": err.Error()}).Warn("Email")
+		log.Warn().
+			Err(err).
+			Str("stage", "marshal token").
+			Msg("email")
 	}
 	attach := sp.Attachment{
 		MIMEType: hum.ContentTypeTextPlainUtf8,
@@ -141,13 +163,15 @@ func sendTokenEmail(token *oauth2.Token, recipient string) {
 
 	id, _, err := client.Send(tx)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal().Err(err).Msg("client.Send")
 	}
-	log.WithFields(log.Fields{"email-id": id}).Info("email")
+	log.Info().
+		Str("email-id", id).
+		Msg("email")
 }
 
 func serveNetHttp(h Handler) {
-	log.Info("STARTING_NET_HTTP")
+	log.Info().Msg("STARTING_NET_HTTP")
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/oauth2callback/production", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
