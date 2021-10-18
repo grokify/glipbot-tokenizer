@@ -10,18 +10,17 @@ import (
 	"strconv"
 
 	sp "github.com/SparkPost/gosparkpost"
-	"github.com/grokify/oauth2more/sparkpost"
+	"github.com/grokify/goauth/credentials"
+	"github.com/grokify/goauth/sparkpost"
 	"github.com/grokify/simplego/config"
 	"github.com/grokify/simplego/net/anyhttp"
-	hum "github.com/grokify/simplego/net/httputilmore"
-	uu "github.com/grokify/simplego/net/urlutil"
+	"github.com/grokify/simplego/net/httputilmore"
+	"github.com/grokify/simplego/net/urlutil"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 
-	"github.com/rs/zerolog/log"
-	//	log "github.com/sirupsen/logrus"
-
 	"github.com/grokify/glipbot-tokenizer/templates"
-	ro "github.com/grokify/oauth2more/ringcentral"
+	ro "github.com/grokify/goauth/ringcentral"
 )
 
 const (
@@ -40,14 +39,14 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 		Str("handler", "handleAnyRequestHome").
 		Msg("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
-	aRes.SetContentType(hum.ContentTypeTextHtmlUtf8)
+	aRes.SetContentType(httputilmore.ContentTypeTextHtmlUtf8)
 	aRes.SetBodyBytes([]byte(templates.HomePage(
 		templates.HomeData{AppServerUrl: h.AppServerUrl})))
 }
 
 type UserData struct {
-	AppCredentials ro.ApplicationCredentials `json:"appCreds,omitempty"`
-	Token          *oauth2.Token             `json:"token,omitempty"`
+	AppCredentials credentials.OAuth2Credentials `json:"appCreds,omitempty"`
+	Token          *oauth2.Token                 `json:"token,omitempty"`
 }
 
 func (h *Handler) handleAnyRequestOAuth2CallbackProd(aRes anyhttp.Response, aReq anyhttp.Request) {
@@ -66,15 +65,15 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
-func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) ro.ApplicationCredentials {
-	appCreds := ro.ApplicationCredentials{
+func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) credentials.OAuth2Credentials {
+	appCreds := credentials.OAuth2Credentials{
 		ServerURL:    rcServerUrl,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
 	if rcServerUrl == ro.ServerURLProduction {
-		appCreds.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
+		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
 	} else {
-		appCreds.RedirectURL = uu.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
+		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
 	}
 	v := url.Values{}
 	v.Add("clientId", appCreds.ClientID)
@@ -146,7 +145,7 @@ func sendTokenEmail(token *oauth2.Token, recipient string) {
 			Msg("email")
 	}
 	attach := sp.Attachment{
-		MIMEType: hum.ContentTypeTextPlainUtf8,
+		MIMEType: httputilmore.ContentTypeTextPlainUtf8,
 		Filename: "token.json.txt",
 		B64Data:  base64.StdEncoding.EncodeToString(data)}
 
