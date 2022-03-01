@@ -12,8 +12,8 @@ import (
 	sp "github.com/SparkPost/gosparkpost"
 	"github.com/grokify/goauth/credentials"
 	"github.com/grokify/goauth/sparkpost"
+	"github.com/grokify/gohttp/anyhttp"
 	"github.com/grokify/mogo/config"
-	"github.com/grokify/mogo/net/anyhttp"
 	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
 	"github.com/rs/zerolog/log"
@@ -45,7 +45,7 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 }
 
 type UserData struct {
-	AppCredentials credentials.OAuth2Credentials `json:"appCreds,omitempty"`
+	AppCredentials credentials.CredentialsOAuth2 `json:"appCreds,omitempty"`
 	Token          *oauth2.Token                 `json:"token,omitempty"`
 }
 
@@ -65,8 +65,8 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
-func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) credentials.OAuth2Credentials {
-	appCreds := credentials.OAuth2Credentials{
+func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) credentials.CredentialsOAuth2 {
+	appCreds := credentials.CredentialsOAuth2{
 		ServerURL:    rcServerUrl,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
