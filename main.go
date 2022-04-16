@@ -39,7 +39,7 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 		Str("handler", "handleAnyRequestHome").
 		Msg("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
-	aRes.SetContentType(httputilmore.ContentTypeTextHtmlUtf8)
+	aRes.SetContentType(httputilmore.ContentTypeTextHTMLUtf8)
 	aRes.SetBodyBytes([]byte(templates.HomePage(
 		templates.HomeData{AppServerUrl: h.AppServerUrl})))
 }
@@ -129,7 +129,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 }
 
 func sendTokenEmail(token *oauth2.Token, recipient string) {
-	client, err := sparkpost.NewApiClient(os.Getenv("SPARKPOST_API_KEY"))
+	client, err := sparkpost.NewAPIClient(os.Getenv("SPARKPOST_API_KEY"))
 	if err != nil {
 		log.Warn().
 			Err(err).
@@ -174,19 +174,19 @@ func serveNetHttp(h Handler) {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/oauth2callback/production", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHttp(w, r))
+		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 	mux.HandleFunc("/oauth2callback/production/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHttp(w, r))
+		h.handleAnyRequestOAuth2CallbackProd(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 	mux.HandleFunc("/oauth2callback/sandbox", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
+		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 	mux.HandleFunc("/oauth2callback/sandbox/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHttp(w, r))
+		h.handleAnyRequestOAuth2CallbackSand(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 	mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.handleAnyRequestHome(anyhttp.NewResReqNetHttp(w, r))
+		h.handleAnyRequestHome(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 
 	done := make(chan bool)
