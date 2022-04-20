@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
-	github.com/grokify/goauth v0.13.4
+	github.com/grokify/goauth v0.13.5
 	github.com/grokify/gohttp v0.2.1
 	github.com/grokify/mogo v0.38.7
 	github.com/rs/zerolog v1.26.1
