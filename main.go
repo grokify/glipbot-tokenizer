@@ -65,12 +65,12 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
-func getAppCredentials(aReq anyhttp.Request, rcServiceURL string) credentials.CredentialsOAuth2 {
+func getAppCredentials(aReq anyhttp.Request, rcServerURL string) credentials.CredentialsOAuth2 {
 	appCreds := credentials.CredentialsOAuth2{
-		ServiceURL:   rcServiceURL,
+		ServerURL:    rcServerURL,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
-	if rcServiceURL == ro.ServerURLProduction {
+	if rcServerURL == ro.ServerURLProduction {
 		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
 	} else {
 		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
