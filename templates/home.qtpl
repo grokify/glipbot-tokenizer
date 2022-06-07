@@ -14,7 +14,7 @@
 
 // https://stackoverflow.com/questions/4907843/open-a-url-in-a-new-tab-and-not-a-new-window-using-javascript
 function buildRedirectUrl() {
-  var baseUrl = '{%s data.AppServerUrl %}';
+  var baseUrl = '{%s data.AppServerURL %}';
 
   var url = baseUrl + '/oauth2callback/' + document.getElementById('environment').value;
 

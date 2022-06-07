@@ -9,5 +9,5 @@ type EmailData struct {
 }
 
 type HomeData struct {
-	AppServerUrl string
+	AppServerURL string
 }

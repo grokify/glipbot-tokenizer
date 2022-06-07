@@ -31,7 +31,7 @@ const (
 
 type Handler struct {
 	AppPort      int
-	AppServerUrl string
+	AppServerURL string
 }
 
 func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Request) {
@@ -41,7 +41,7 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(httputilmore.ContentTypeTextHTMLUtf8)
 	aRes.SetBodyBytes([]byte(templates.HomePage(
-		templates.HomeData{AppServerUrl: h.AppServerUrl})))
+		templates.HomeData{AppServerURL: h.AppServerURL})))
 }
 
 type UserData struct {
@@ -65,12 +65,12 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
-func getAppCredentials(aReq anyhttp.Request, rcServerUrl string) credentials.CredentialsOAuth2 {
+func getAppCredentials(aReq anyhttp.Request, rcServiceURL string) credentials.CredentialsOAuth2 {
 	appCreds := credentials.CredentialsOAuth2{
-		ServerURL:    rcServerUrl,
+		ServerURL:    rcServiceURL,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
-	if rcServerUrl == ro.ServerURLProduction {
+	if rcServiceURL == ro.ServerURLProduction {
 		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
 	} else {
 		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
@@ -210,7 +210,7 @@ func main() {
 
 	handler := Handler{
 		AppPort:      port,
-		AppServerUrl: os.Getenv("APP_SERVER_URL")}
+		AppServerURL: os.Getenv("APP_SERVER_URL")}
 
 	serveNetHttp(handler)
 }
