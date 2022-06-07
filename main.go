@@ -67,7 +67,7 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 
 func getAppCredentials(aReq anyhttp.Request, rcServiceURL string) credentials.CredentialsOAuth2 {
 	appCreds := credentials.CredentialsOAuth2{
-		ServerURL:    rcServiceURL,
+		ServiceURL:   rcServiceURL,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
 	if rcServiceURL == ro.ServerURLProduction {
