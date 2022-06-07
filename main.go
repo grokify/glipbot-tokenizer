@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -25,8 +26,8 @@ import (
 
 const (
 	HeaderXServerURL      = "X-Server-URL"
-	RedirectUriProduction = "/oauth2callback/production"
-	RedirectUriSandbox    = "/oauth2callback/sandbox"
+	RedirectURLProduction = "/oauth2callback/production"
+	RedirectURLSandbox    = "/oauth2callback/sandbox"
 )
 
 type Handler struct {
@@ -71,9 +72,9 @@ func getAppCredentials(aReq anyhttp.Request, rcServerURL string) credentials.Cre
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
 	if rcServerURL == ro.ServerURLProduction {
-		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriProduction)
+		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectURLProduction)
 	} else {
-		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectUriSandbox)
+		appCreds.RedirectURL = urlutil.JoinAbsolute(os.Getenv("APP_SERVER_URL"), RedirectURLSandbox)
 	}
 	v := url.Values{}
 	v.Add("clientId", appCreds.ClientID)
@@ -110,7 +111,7 @@ func (h *Handler) handleAnyRequestOAuth2Callback(aRes anyhttp.Response, aReq any
 		Msg("authCode")
 
 	o2Config := appCredentials.Config()
-	token, err := o2Config.Exchange(oauth2.NoContext, authCode)
+	token, err := o2Config.Exchange(context.Background(), authCode)
 	if err != nil {
 		log.Warn().
 			Err(err).
@@ -169,7 +170,7 @@ func sendTokenEmail(token *oauth2.Token, recipient string) {
 		Msg("email")
 }
 
-func serveNetHttp(h Handler) {
+func serveNetHTTP(h Handler) {
 	log.Info().Msg("STARTING_NET_HTTP")
 	mux := http.NewServeMux()
 
@@ -212,5 +213,5 @@ func main() {
 		AppPort:      port,
 		AppServerURL: os.Getenv("APP_SERVER_URL")}
 
-	serveNetHttp(handler)
+	serveNetHTTP(handler)
 }
