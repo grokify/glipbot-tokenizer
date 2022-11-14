@@ -41,8 +41,13 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 		Msg("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(httputilmore.ContentTypeTextHTMLUtf8)
-	aRes.SetBodyBytes([]byte(templates.HomePage(
+	_, err := aRes.SetBodyBytes([]byte(templates.HomePage(
 		templates.HomeData{AppServerURL: h.AppServerURL})))
+	if err != nil {
+		log.Warn().
+			Err(err).
+			Msg("failure on `anyhttp.Response.SetBodyBytes`")
+	}
 }
 
 type UserData struct {
