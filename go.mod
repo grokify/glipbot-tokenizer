@@ -6,7 +6,7 @@ require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.16.5
 	github.com/grokify/gohttp v0.2.2
-	github.com/grokify/mogo v0.41.2
+	github.com/grokify/mogo v0.41.3
 	github.com/rs/zerolog v1.28.0
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.2.0
