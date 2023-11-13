@@ -5,10 +5,12 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	stdlog "log"
 	"net/http"
 	"net/url"
 	"os"
 	"strconv"
+	"time"
 
 	sp "github.com/SparkPost/gosparkpost"
 	"github.com/grokify/goauth"
@@ -195,10 +197,14 @@ func serveNetHTTP(h Handler) {
 		h.handleAnyRequestHome(anyhttp.NewResReqNetHTTP(w, r))
 	}))
 
-	done := make(chan bool)
-	go http.ListenAndServe(fmt.Sprintf(":%v", h.AppPort), mux)
-	log.Printf("Server listening on port %v", h.AppPort)
-	<-done
+	svr := httputilmore.NewServerTimeouts(fmt.Sprintf(":%v", h.AppPort), mux, 1*time.Second)
+	stdlog.Fatal(svr.ListenAndServe())
+	/*
+	   done := make(chan bool)
+	   go http.ListenAndServe(fmt.Sprintf(":%v", h.AppPort), mux)
+	   log.Printf("Server listening on port %v", h.AppPort)
+	   <-done
+	*/
 }
 
 func main() {
