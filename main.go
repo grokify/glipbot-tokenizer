@@ -11,11 +11,11 @@ import (
 	"strconv"
 
 	sp "github.com/SparkPost/gosparkpost"
-	"github.com/grokify/goauth/credentials"
+	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/sparkpost"
 	"github.com/grokify/gohttp/anyhttp"
 	"github.com/grokify/mogo/config"
-	"github.com/grokify/mogo/net/httputilmore"
+	"github.com/grokify/mogo/net/http/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
@@ -51,8 +51,8 @@ func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Reque
 }
 
 type UserData struct {
-	AppCredentials credentials.CredentialsOAuth2 `json:"appCreds,omitempty"`
-	Token          *oauth2.Token                 `json:"token,omitempty"`
+	AppCredentials goauth.CredentialsOAuth2 `json:"appCreds,omitempty"`
+	Token          *oauth2.Token            `json:"token,omitempty"`
 }
 
 func (h *Handler) handleAnyRequestOAuth2CallbackProd(aRes anyhttp.Response, aReq anyhttp.Request) {
@@ -71,8 +71,8 @@ func (h *Handler) handleAnyRequestOAuth2CallbackSand(aRes anyhttp.Response, aReq
 	h.handleAnyRequestOAuth2Callback(aRes, aReq)
 }
 
-func getAppCredentials(aReq anyhttp.Request, rcServerURL string) credentials.CredentialsOAuth2 {
-	appCreds := credentials.CredentialsOAuth2{
+func getAppCredentials(aReq anyhttp.Request, rcServerURL string) goauth.CredentialsOAuth2 {
+	appCreds := goauth.CredentialsOAuth2{
 		ServerURL:    rcServerURL,
 		ClientID:     aReq.QueryArgs().GetString("clientId"),
 		ClientSecret: aReq.QueryArgs().GetString("clientSecret")}
@@ -202,7 +202,7 @@ func serveNetHTTP(h Handler) {
 }
 
 func main() {
-	err := config.LoadDotEnvSkipEmpty(os.Getenv("ENV_PATH"), "./.env")
+	_, err := config.LoadDotEnv([]string{os.Getenv("ENV_PATH"), "./.env"}, 1)
 	if err != nil {
 		panic(err)
 	}
