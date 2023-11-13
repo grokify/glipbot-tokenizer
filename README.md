@@ -47,7 +47,7 @@ More information on deploying Go on Heroku here:
 | `SPARKPOST_EMAIL_SENDER` | y | Your sender email address. The domain must be verified by SparkPost |
 | `HTTP_ENGINE` | n | HTTP engine. Currently `nethttp` is supported |
 
- [build-status-svg]: https://github.com/grokify/glipbot-tokenizer/workflows/go%20build/badge.svg?branch=master
+ [build-status-svg]: https://github.com/grokify/glipbot-tokenizer/workflows/test/badge.svg
  [build-status-url]: https://github.com/grokify/glipbot-tokenizer/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/glipbot-tokenizer
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/glipbot-tokenizer
