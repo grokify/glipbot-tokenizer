@@ -15,10 +15,10 @@ import (
 	sp "github.com/SparkPost/gosparkpost"
 	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/sparkpost"
-	"github.com/grokify/gohttp/anyhttp"
 	"github.com/grokify/mogo/config"
 	"github.com/grokify/mogo/net/http/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
+	"github.com/grokify/xgo/net/http/anyhttp"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 
