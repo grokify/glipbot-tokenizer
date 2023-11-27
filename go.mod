@@ -7,7 +7,7 @@ go 1.21
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.20.5
-	github.com/grokify/mogo v0.61.0
+	github.com/grokify/mogo v0.61.1
 	github.com/grokify/xgo v0.6.0
 	github.com/rs/zerolog v1.31.0
 	github.com/valyala/quicktemplate v1.7.0
