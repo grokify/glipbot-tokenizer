@@ -8,7 +8,7 @@ require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.20.4
 	github.com/grokify/gohttp v0.2.7
-	github.com/grokify/mogo v0.60.1
+	github.com/grokify/mogo v0.61.0
 	github.com/rs/zerolog v1.31.0
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.14.0
@@ -18,7 +18,6 @@ require (
 	cloud.google.com/go/compute v1.23.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
-	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
 	github.com/golang-jwt/jwt/v5 v5.1.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -41,7 +40,6 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.50.0 // indirect
-	github.com/valyala/fastjson v1.6.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.15.0 // indirect
 	golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa // indirect
@@ -53,5 +51,4 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231106174013-bbf56f31fb17 // indirect
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
-	gopkg.in/oleiade/reflections.v1 v1.0.0 // indirect
 )
