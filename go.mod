@@ -7,8 +7,8 @@ go 1.21
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.20.10
-	github.com/grokify/mogo v0.62.8
-	github.com/grokify/xgo v0.7.4
+	github.com/grokify/mogo v0.63.0
+	github.com/grokify/xgo v0.7.5
 	github.com/rs/zerolog v1.31.0
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.16.0
@@ -33,7 +33,7 @@ require (
 	github.com/huandu/xstrings v1.4.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.17.4 // indirect
+	github.com/klauspost/compress v1.17.5 // indirect
 	github.com/martinlindhe/base36 v1.1.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
