@@ -7,7 +7,7 @@ toolchain go1.22.1
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.20.14
-	github.com/grokify/mogo v0.63.8
+	github.com/grokify/mogo v0.63.9
 	github.com/grokify/xgo v0.7.8
 	github.com/rs/zerolog v1.32.0
 	github.com/valyala/quicktemplate v1.7.0
@@ -49,7 +49,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.25.0 // indirect
 	go.opentelemetry.io/otel/trace v1.25.0 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
-	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 // indirect
+	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
