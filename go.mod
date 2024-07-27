@@ -1,13 +1,12 @@
 module github.com/grokify/glipbot-tokenizer
 
 go 1.22
-
-toolchain go1.22.1
+toolchain go1.22.5
 
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.20.15
-	github.com/grokify/mogo v0.63.10
+	github.com/grokify/mogo v0.64.6
 	github.com/grokify/xgo v0.7.8
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.7.0
@@ -31,8 +30,8 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.3 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/huandu/xstrings v1.4.0 // indirect
-	github.com/jessevdk/go-flags v1.5.0 // indirect
+	github.com/huandu/xstrings v1.5.0 // indirect
+	github.com/jessevdk/go-flags v1.6.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.7 // indirect
@@ -49,13 +48,13 @@ require (
 	go.opentelemetry.io/otel v1.26.0 // indirect
 	go.opentelemetry.io/otel/metric v1.26.0 // indirect
 	go.opentelemetry.io/otel/trace v1.26.0 // indirect
-	golang.org/x/crypto v0.22.0 // indirect
-	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
-	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/crypto v0.25.0 // indirect
+	golang.org/x/exp v0.0.0-20240707233637-46b078467d37 // indirect
+	golang.org/x/net v0.27.0 // indirect
+	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	google.golang.org/api v0.176.1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240429193739-8cf5692501f6 // indirect
 	google.golang.org/grpc v1.63.2 // indirect
-	google.golang.org/protobuf v1.34.0 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 )
