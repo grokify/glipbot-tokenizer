@@ -18,7 +18,7 @@ import (
 	"github.com/grokify/mogo/config"
 	"github.com/grokify/mogo/net/http/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
-	"github.com/grokify/xgo/net/http/anyhttp"
+	"github.com/grokify/sogo/net/http/anyhttp"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 
