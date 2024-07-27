@@ -11,7 +11,7 @@ require (
 	github.com/grokify/xgo v0.7.8
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.7.0
-	golang.org/x/oauth2 v0.19.0
+	golang.org/x/oauth2 v0.21.0
 )
 
 require (
