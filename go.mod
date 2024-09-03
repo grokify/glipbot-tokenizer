@@ -7,7 +7,7 @@ toolchain go1.22.3
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.21.10
-	github.com/grokify/mogo v0.64.9
+	github.com/grokify/mogo v0.64.10
 	github.com/grokify/sogo v0.8.9
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.8.0
