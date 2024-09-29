@@ -1,14 +1,13 @@
 module github.com/grokify/glipbot-tokenizer
 
 go 1.22.0
-
-toolchain go1.22.3
+toolchain go1.22.7
 
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.21.10
 	github.com/grokify/mogo v0.64.11
-	github.com/grokify/sogo v0.8.9
+	github.com/grokify/sogo v0.8.10
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.23.0
