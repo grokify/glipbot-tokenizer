@@ -6,7 +6,7 @@ require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.22.7
 	github.com/grokify/mogo v0.67.1
-	github.com/grokify/sogo v0.8.17
+	github.com/grokify/sogo v0.8.18
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.25.0
@@ -45,9 +45,9 @@ require (
 	go.opentelemetry.io/otel v1.33.0 // indirect
 	go.opentelemetry.io/otel/metric v1.33.0 // indirect
 	go.opentelemetry.io/otel/trace v1.33.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
-	golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
+	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8 // indirect
+	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/api v0.214.0 // indirect
