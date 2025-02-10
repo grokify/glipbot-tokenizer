@@ -1,6 +1,7 @@
 # Glipbot Tokenizer
 
 [![Build Status][build-status-svg]][build-status-url]
+[![Lint Status][lint-status-svg]][lint-status-url]
 [![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
@@ -48,7 +49,9 @@ More information on deploying Go on Heroku here:
 | `HTTP_ENGINE` | n | HTTP engine. Currently `nethttp` is supported |
 
  [build-status-svg]: https://github.com/grokify/glipbot-tokenizer/workflows/test/badge.svg
- [build-status-url]: https://github.com/grokify/glipbot-tokenizer/actions
+ [build-status-url]: https://github.com/grokify/glipbot-tokenizer/actions/workflows/test.yaml
+ [lint-status-svg]: https://github.com/grokify/glipbot-tokenizer/workflows/lint/badge.svg
+ [lint-status-url]: https://github.com/grokify/glipbot-tokenizer/actions/workflows/lint.yaml
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/glipbot-tokenizer
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/glipbot-tokenizer
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
