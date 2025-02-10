@@ -40,6 +40,7 @@ type Handler struct {
 func (h *Handler) handleAnyRequestHome(aRes anyhttp.Response, aReq anyhttp.Request) {
 	log.Info().
 		Str("handler", "handleAnyRequestHome").
+		Str("reqURL", string(aReq.RequestURI())).
 		Msg("StartHandler")
 	aRes.SetStatusCode(http.StatusOK)
 	aRes.SetContentType(httputilmore.ContentTypeTextHTMLUtf8)
