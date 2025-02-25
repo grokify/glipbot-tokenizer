@@ -9,7 +9,7 @@ require (
 	github.com/grokify/sogo v0.10.1
 	github.com/rs/zerolog v1.33.0
 	github.com/valyala/quicktemplate v1.8.0
-	golang.org/x/oauth2 v0.26.0
+	golang.org/x/oauth2 v0.27.0
 )
 
 require (
