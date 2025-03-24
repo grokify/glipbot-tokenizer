@@ -7,7 +7,7 @@ require (
 	github.com/grokify/goauth v0.23.5
 	github.com/grokify/mogo v0.67.9
 	github.com/grokify/sogo v0.10.1
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.28.0
 )
