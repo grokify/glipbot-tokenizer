@@ -5,8 +5,8 @@ go 1.24.0
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.23.19
-	github.com/grokify/mogo v0.70.18
-	github.com/grokify/sogo v0.11.10
+	github.com/grokify/mogo v0.70.19
+	github.com/grokify/sogo v0.12.1
 	github.com/rs/zerolog v1.34.0
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.30.0
