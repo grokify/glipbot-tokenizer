@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/SparkPost/gosparkpost v0.2.0
 	github.com/grokify/goauth v0.23.19
-	github.com/grokify/mogo v0.70.20
+	github.com/grokify/mogo v0.70.21
 	github.com/grokify/sogo v0.12.1
 	github.com/rs/zerolog v1.34.0
 	github.com/valyala/quicktemplate v1.8.0
@@ -48,7 +48,7 @@ require (
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/exp v0.0.0-20250819193227-8b4c13bb791b // indirect
 	golang.org/x/net v0.43.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.28.0 // indirect
 	google.golang.org/api v0.248.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250826171959-ef028d996bc1 // indirect
